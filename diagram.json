@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "author": "Smart Water Conservation System",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 10.2, "left": 345, "attrs": {} },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic",
+      "top": -209.7,
+      "left": 91.9,
+      "attrs": { "distance": "60" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd",
+      "top": -339.2,
+      "left": 744.8,
+      "attrs": { "pins": "i2c", "i2cAddress": "0x27" }
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay",
+      "top": -105.4,
+      "left": 950.4,
+      "attrs": { "transistor": "pnp" }
+    },
+    {
+      "type": "wokwi-dc-motor",
+      "id": "pump",
+      "top": 350,
+      "left": 850,
+      "attrs": { "label": "Water Pump" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "buzzer",
+      "top": 223.2,
+      "left": 981,
+      "attrs": { "volume": "0.2" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "green",
+      "top": 380.4,
+      "left": 195.8,
+      "attrs": { "color": "green", "label": "FULL" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "yellow",
+      "top": 390,
+      "left": 272.6,
+      "attrs": { "color": "yellow", "label": "HIGH" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "red",
+      "top": 399.6,
+      "left": 368.6,
+      "attrs": { "color": "red", "label": "LOW" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rGreen",
+      "top": 500,
+      "left": 180,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rYellow",
+      "top": 500,
+      "left": 260,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rRed",
+      "top": 500,
+      "left": 340,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "ultrasonic:VCC", "uno:5V", "red", [] ],
+    [ "ultrasonic:GND", "uno:GND.1", "black", [] ],
+    [ "ultrasonic:TRIG", "uno:9", "green", [] ],
+    [ "ultrasonic:ECHO", "uno:10", "green", [] ],
+    [ "lcd:VCC", "uno:5V", "red", [] ],
+    [ "lcd:GND", "uno:GND.1", "black", [] ],
+    [ "lcd:SDA", "uno:A4", "green", [] ],
+    [ "lcd:SCL", "uno:A5", "green", [] ],
+    [ "relay:VCC", "uno:5V", "red", [] ],
+    [ "relay:GND", "uno:GND.1", "black", [] ],
+    [ "relay:IN", "uno:8", "blue", [] ],
+    [ "buzzer:1", "uno:7", "purple", [] ],
+    [ "buzzer:2", "uno:GND.2", "black", [] ],
+    [ "uno:5", "rGreen:1", "green", [] ],
+    [ "rGreen:2", "green:A", "green", [] ],
+    [ "green:C", "uno:GND.2", "black", [] ],
+    [ "uno:6", "rYellow:1", "yellow", [] ],
+    [ "rYellow:2", "yellow:A", "yellow", [] ],
+    [ "yellow:C", "uno:GND.2", "black", [] ],
+    [ "uno:4", "rRed:1", "red", [] ],
+    [ "rRed:2", "red:A", "red", [] ],
+    [ "red:C", "uno:GND.2", "black", [] ],
+    [ "uno:5V", "relay:COM", "red", [] ],
+    [ "relay:NO", "pump:A+", "red", [] ],
+    [ "pump:A-", "uno:GND.2", "black", [] ],
+    [ "uno:GND.3", "uno:AREF", "black", [ "v115.1", "h-159.2", "v-297.6" ] ]
+  ],
+  "serialMonitor": { "convertEol": true, "display": "always", "newline": "lf" },
+  "dependencies": {}
+}
